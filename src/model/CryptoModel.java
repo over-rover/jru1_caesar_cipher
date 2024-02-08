@@ -1,24 +1,24 @@
 package model;
 
 public class CryptoModel {
-    private String source;
-    private String target;
+    private String sourcePath;
+    private String targetPath;
     private int key;
 
-    public String getSource() {
-        return source;
+    public String getSourcePath() {
+        return sourcePath;
     }
 
-    public void setSource(String source) {
-        this.source = source;
+    public void setSourcePath(String sourcePath) {
+        this.sourcePath = sourcePath;
     }
 
-    public String getTarget() {
-        return target;
+    public String getTargetPath() {
+        return targetPath;
     }
 
-    public void setTarget(String target) {
-        this.target = target;
+    public void setTargetPath(String targetPath) {
+        this.targetPath = targetPath;
     }
 
     public int getKey() {

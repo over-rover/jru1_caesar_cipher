@@ -15,10 +15,10 @@ public class ConsoleService {
     public CryptoModel createCryptoModel(String sourceFile) {
         CryptoModel cryptoModel = new CryptoModel();
         System.out.println(sourceFile);
-        cryptoModel.setSource(sc.nextLine());
+        cryptoModel.setSourcePath(sc.nextLine());
 
         System.out.println(Consts.RESULT_FILE);
-        cryptoModel.setTarget(sc.nextLine());
+        cryptoModel.setTargetPath(sc.nextLine());
 
         System.out.println(Consts.ENTER_KEY);
         cryptoModel.setKey(Utils.normalizeKey(sc.nextInt()));

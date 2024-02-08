@@ -17,12 +17,12 @@ public class Main {
         switch (value) {
             case 1: {
                 CryptoModel cryptoModel = consoleService.createCryptoModel(Consts.ENCRYPT_FILE);
-                cryptoService.encrypt(cryptoModel);
+                cryptoService.crypt(cryptoModel);
                 break;
             }
             case 2: {
                 CryptoModel cryptoModel = consoleService.createCryptoModel(Consts.DECRYPT_FILE);
-                cryptoService.decrypt(cryptoModel);
+                cryptoService.crypt(cryptoModel);
                 break;
             }
         }
