@@ -30,6 +30,15 @@ public class FileService {
         }
     }
 
+    public void write(String target, CharSequence data) throws FileException {
+        try {
+            Files.writeString(Path.of(target), data);
+        } catch (IOException e) {
+            loggerService.logException(Consts.WRITE_FILE_ERROR, e);
+            throw new FileException(Consts.WRITE_FILE_ERROR, e);
+        }
+    }
+
     public void deleteFile(String file) throws FileException {
         try {
             Files.delete(Path.of(file));

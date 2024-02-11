@@ -1,3 +1,4 @@
+import consts.Consts;
 import model.CryptoModel;
 import model.HackModel;
 import service.BruteForceService;
@@ -6,17 +7,19 @@ import service.FileService;
 
 public class MainBruteforce {
     public static void main(String[] args) {
+        //Создаем зашифрованный файл
         CryptoModel cryptoModel = new CryptoModel();
         setEncryptModel(cryptoModel);
         new CryptoService(new FileService()).crypt(cryptoModel);
         System.out.println("Ключ key = " + cryptoModel.getKey() +
                 " Файл зашифрован и дотупен здесь: resources/bruteforce/source.txt");
 
+        //Расшифровка файла брутфорсом
         HackModel hackModel = new HackModel();
         setBruteforceModel(hackModel);
         new BruteForceService(hackModel).bruteForce();
         System.out.println("Расшифрованный файл: resources/bruteforce/target.txt");
-        System.out.println("Ключ указан в конце файла.");
+        System.out.println("Ключ = " + (hackModel.getKey() - Consts.RU_ALPHABET.length));
     }
 
     public static void setEncryptModel(CryptoModel model) {

@@ -1,5 +1,9 @@
 package model;
 
+import service.Utils;
+
+import java.util.HashMap;
+
 public class CryptoModel {
     private String sourcePath;
     private String targetPath;
@@ -27,5 +31,9 @@ public class CryptoModel {
 
     public void setKey(int key) {
         this.key = key;
+    }
+
+    public HashMap<Character, Character> getCryptoTable() {
+        return Utils.createCryptoTable(key);
     }
 }

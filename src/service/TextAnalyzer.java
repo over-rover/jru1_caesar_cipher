@@ -4,13 +4,22 @@ import java.util.HashSet;
 import java.util.List;
 
 public class TextAnalyzer {
-    protected int countRootMatches(List<String> text, List<String> dictionary) {
+    /*protected int countRootMatches(List<String> text, List<String> dictionary) {
         HashSet<String> normalizedText = Utils.normalizeText(text);
         HashSet<String> foundRoots = new HashSet<>();
         for (String word : normalizedText) {
             fixRootIfMatches(word, dictionary, foundRoots);
         }
         return getNumberOfMatches(foundRoots);
+    }*/
+
+    protected int countRootMatches(String text, List<String> dictionary) {
+        HashSet<String> normalizedText = Utils.normalizeText(text);
+        HashSet<String> matchedRoots = new HashSet<>();
+        for (String word : normalizedText) {
+            fixRootIfMatches(word, dictionary, matchedRoots);
+        }
+        return getNumberOfMatches(matchedRoots);
     }
 
     private int getNumberOfMatches(HashSet<String> foundRoots) {
