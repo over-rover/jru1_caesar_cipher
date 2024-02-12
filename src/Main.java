@@ -1,3 +1,4 @@
+/*
 import consts.Consts;
 import model.CryptoModel;
 import service.ConsoleService;
@@ -27,4 +28,4 @@ public class Main {
             }
         }
     }
-}
+}*/

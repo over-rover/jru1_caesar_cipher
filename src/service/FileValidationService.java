@@ -6,12 +6,16 @@ import exceptions.FileException;
 import java.util.List;
 
 public class FileValidationService {
-    FileService fileService = new FileService();
+    LoggerService loggerService;
+
+    public FileValidationService(LoggerService loggerService) {
+        this.loggerService = loggerService;
+    }
 
     public void isEmpty(List<String> sourceText) throws FileException {
         if (sourceText.isEmpty()) {
             FileException e = new FileException(Consts.FILE_IS_EMPTY);
-            fileService.loggerService.logException(e.getMessage(), e);
+            loggerService.logException(e.getMessage(), e);
             throw e;
         }
     }

@@ -7,11 +7,12 @@ import java.util.List;
 
 
 public class CryptoService {
-    FileService fileService;
-    private final FileValidationService fileValid = new FileValidationService();
+    protected final FileService fileService;
+    protected final FileValidationService fileValid;
 
-    public CryptoService(FileService fileService) {
+    public CryptoService(FileService fileService, FileValidationService fileValid) {
         this.fileService = fileService;
+        this.fileValid = fileValid;
     }
 
     public void crypt(CryptoModel model) {

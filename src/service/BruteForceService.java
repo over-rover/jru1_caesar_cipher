@@ -7,12 +7,13 @@ import java.util.List;
 
 public class BruteForceService {
     private final HackModel model;
-    private final CryptoService cryptoService = new CryptoService(new FileService());
-    private final FileValidationService fileValid = new FileValidationService();
-    private final TextAnalyzer textAnalyzer = new TextAnalyzer();
+    private final CryptoService cryptoService;
+    private final TextAnalyzer textAnalyzer;
 
-    public BruteForceService(HackModel model) {
+    public BruteForceService(HackModel model, CryptoService cryptoService, TextAnalyzer textAnalyzer) {
         this.model = model;
+        this.cryptoService = cryptoService;
+        this.textAnalyzer = textAnalyzer;
     }
 
     private List<String> readDictionaryFrom(String dictionaryPath) {
@@ -21,9 +22,9 @@ public class BruteForceService {
 
     public void bruteForce() {
         List<String> dictionary = readDictionaryFrom(model.getDictionaryPath());
-        fileValid.isEmpty(dictionary);
+        cryptoService.fileValid.isEmpty(dictionary);
         List<String> sourceText = cryptoService.readFile(model.getSourcePath());
-        fileValid.isEmpty(sourceText);
+        cryptoService.fileValid.isEmpty(sourceText);
         String resultText = getResult(sourceText, dictionary);
         cryptoService.writeToFile(model.getTargetPath(), resultText);
     }

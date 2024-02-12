@@ -4,29 +4,18 @@ import java.util.HashSet;
 import java.util.List;
 
 public class TextAnalyzer {
-    /*protected int countRootMatches(List<String> text, List<String> dictionary) {
-        HashSet<String> normalizedText = Utils.normalizeText(text);
-        HashSet<String> foundRoots = new HashSet<>();
-        for (String word : normalizedText) {
-            fixRootIfMatches(word, dictionary, foundRoots);
-        }
-        return getNumberOfMatches(foundRoots);
-    }*/
 
+    //Проверяет, имеются ли эталонные слова в тексте, и возвращает количество совпавших слов.
     protected int countRootMatches(String text, List<String> dictionary) {
         HashSet<String> normalizedText = Utils.normalizeText(text);
         HashSet<String> matchedRoots = new HashSet<>();
         for (String word : normalizedText) {
-            fixRootIfMatches(word, dictionary, matchedRoots);
+            addRootIfPresentInWord(word, dictionary, matchedRoots);
         }
-        return getNumberOfMatches(matchedRoots);
+        return matchedRoots.size();
     }
 
-    private int getNumberOfMatches(HashSet<String> foundRoots) {
-        return foundRoots.size();
-    }
-
-    private void fixRootIfMatches(String word, List<String> dictionary, HashSet<String> foundRoots) {
+    private void addRootIfPresentInWord(String word, List<String> dictionary, HashSet<String> foundRoots) {
         for (String root : dictionary) {
             if (word.contains(root)) {
                 foundRoots.add(root);

@@ -10,7 +10,11 @@ import java.nio.file.StandardCopyOption;
 import java.util.List;
 
 public class FileService {
-    protected final LoggerService loggerService = new LoggerService(this);
+    protected final LoggerService loggerService;
+
+    public FileService(LoggerService loggerService) {
+        this.loggerService = loggerService;
+    }
 
     public List<String> read(String source) throws FileException {
         try {
