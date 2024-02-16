@@ -1,11 +1,9 @@
 package model;
 
-/*
- * Местонахождение файла-словаря решил привязать к модели.
- * HackModel создается для брутфорса и статистического анализа.
- **/
+import consts.Consts;
+
 public class HackModel extends CryptoModel {
-    private String dictionaryPath;
+    private String dictionaryPath = Consts.DICTIONARY_FILE;
 
     public String getDictionaryPath() {
         return dictionaryPath;

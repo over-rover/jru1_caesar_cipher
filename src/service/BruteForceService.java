@@ -1,6 +1,7 @@
 package service;
 
 import consts.Consts;
+import exceptions.ValidateException;
 import model.HackModel;
 
 import java.util.List;
@@ -9,24 +10,31 @@ public class BruteForceService {
     private final HackModel model;
     private final CryptoService cryptoService;
     private final TextAnalyzer textAnalyzer;
+    protected final FileService fileService;
+    protected final FileValidationService fileValidationService;
 
-    public BruteForceService(HackModel model, CryptoService cryptoService, TextAnalyzer textAnalyzer) {
+    public BruteForceService(HackModel model, CryptoService cryptoService, TextAnalyzer textAnalyzer,
+                             FileService fileService, FileValidationService fileValidationService) {
         this.model = model;
         this.cryptoService = cryptoService;
         this.textAnalyzer = textAnalyzer;
+        this.fileService = fileService;
+        this.fileValidationService = fileValidationService;
     }
 
     private List<String> readDictionaryFrom(String dictionaryPath) {
-        return cryptoService.readFile(dictionaryPath);
+        return fileService.read(dictionaryPath);
     }
 
-    public void bruteForce() {
+    public void bruteForce() throws ValidateException {
         List<String> dictionary = readDictionaryFrom(model.getDictionaryPath());
-        cryptoService.fileValid.isEmpty(dictionary);
-        List<String> sourceText = cryptoService.readFile(model.getSourcePath());
-        cryptoService.fileValid.isEmpty(sourceText);
+        fileValidationService.isEmpty(dictionary);
+
+        fileValidationService.isSystemFile(model.getSourcePath());
+        List<String> sourceText = fileService.read(model.getSourcePath());
+        fileValidationService.isEmpty(sourceText);
         String resultText = getResult(sourceText, dictionary);
-        cryptoService.writeToFile(model.getTargetPath(), resultText);
+        fileService.write(model.getTargetPath(), resultText);
     }
 
 

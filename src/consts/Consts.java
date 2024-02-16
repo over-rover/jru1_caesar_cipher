@@ -10,12 +10,16 @@ public class Consts {
     public static final String WRITE_FILE_ERROR = "Ошибка при записи в файл";
     public static final String DELETE_FILE_ERROR = "Ошибка при удалении файла";
     public static final String COPY_FILE_ERROR = "Ошибка при копировании файла";
-    public static final String FILE_IS_EMPTY = "Файл пустой";
+    public static final String FILE_IS_EMPTY = "Ошибка!!! Файл пустой.";
+    public static final String UNPERMITTED_FILE_FORMAT = "Ошибка!!! Попытка доступа к системному файлу.";
+    public static final String INCORRECT_MENU_TYPE = "Ошибка!!! Вы указали число, не представленное в списке меню.";
 
-    //Справочно: в массиве 47 элементов
     public static final char[] RU_ALPHABET = {'а', 'б', 'в', 'г', 'д', 'е', 'ё', 'ж', 'з', 'и', 'й', 'к', 'л', 'м',
             'н', 'о', 'п', 'р', 'с', 'т', 'у', 'ф', 'х', 'ц', 'ч', 'ш', 'щ', 'ъ', 'ы', 'ь', 'э', 'ю', 'я',
             '.', ',', '(', ')', '«', '»', '"', '\\', '-', ':', ';', '!', '?', ' '};
 
     public static final String SPACE = " ";
+    public static final String[] SYSTEM_FILE_EXTENSIONS = {"bak", "cab", "cfg", "cpl", "dll", "dmp", "icns", "ini",
+            "msi", "sys", "exe", "bin"};
+    public static final String DICTIONARY_FILE = "resources/bruteforce/dictionary.txt";
 }

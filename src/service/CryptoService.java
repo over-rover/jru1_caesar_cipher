@@ -1,36 +1,31 @@
 package service;
 
+import exceptions.ValidateException;
 import model.CryptoModel;
 
-import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 public class CryptoService {
     protected final FileService fileService;
-    protected final FileValidationService fileValid;
+    protected final FileValidationService fileValidationService;
 
-    public CryptoService(FileService fileService, FileValidationService fileValid) {
+    public CryptoService(FileService fileService, FileValidationService fileValidationService) {
         this.fileService = fileService;
-        this.fileValid = fileValid;
+        this.fileValidationService = fileValidationService;
     }
 
-    public void crypt(CryptoModel model) {
-        List<String> sourceText = readFile(model.getSourcePath());
-        fileValid.isEmpty(sourceText);
+    public void crypt(CryptoModel model) throws ValidateException {
+        fileValidationService.isSystemFile(model.getSourcePath());
+        List<String> sourceText = fileService.read(model.getSourcePath());
+        fileValidationService.isEmpty(sourceText);
         StringBuilder cryptoText = cryptText(String.valueOf(sourceText), model.getCryptoTable());
-        writeToFile(model.getTargetPath(), cryptoText);
+        fileValidationService.isSystemFile(model.getTargetPath());
+        fileService.write(model.getTargetPath(), cryptoText);
     }
 
-    protected List<String> readFile(String sourcePath) {
-        return fileService.read(sourcePath);
-    }
-
-    protected void writeToFile(String targetPath, CharSequence cryptoText) {
-        fileService.write(targetPath, cryptoText);
-    }
-
-    protected StringBuilder cryptText(String stringText, HashMap<Character, Character> cryptoTable) {
+    protected StringBuilder cryptText(String stringText, Map<Character, Character> cryptoTable) {
         StringBuilder stringBuilderText = new StringBuilder();
         for (int i = 0; i < stringText.length(); i++) {
             char symbol = stringText.charAt(i);

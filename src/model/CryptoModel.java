@@ -2,7 +2,7 @@ package model;
 
 import service.Utils;
 
-import java.util.HashMap;
+import java.util.Map;
 
 public class CryptoModel {
     private String sourcePath;
@@ -33,7 +33,7 @@ public class CryptoModel {
         this.key = key;
     }
 
-    public HashMap<Character, Character> getCryptoTable() {
+    public Map<Character, Character> getCryptoTable() {
         return Utils.createCryptoTable(key);
     }
 }

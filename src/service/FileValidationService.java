@@ -1,22 +1,32 @@
 package service;
 
 import consts.Consts;
-import exceptions.FileException;
+import exceptions.ValidateException;
 
 import java.util.List;
 
 public class FileValidationService {
-    LoggerService loggerService;
+    private final LoggerService loggerService;
 
     public FileValidationService(LoggerService loggerService) {
         this.loggerService = loggerService;
     }
 
-    public void isEmpty(List<String> sourceText) throws FileException {
+    protected void isEmpty(List<String> sourceText) throws ValidateException {
         if (sourceText.isEmpty()) {
-            FileException e = new FileException(Consts.FILE_IS_EMPTY);
+            ValidateException e = new ValidateException(Consts.FILE_IS_EMPTY);
             loggerService.logException(e.getMessage(), e);
             throw e;
+        }
+    }
+
+    protected void isSystemFile(String fileName) throws ValidateException {
+        for (String extension : Consts.SYSTEM_FILE_EXTENSIONS) {
+            if (fileName.endsWith(extension)) {
+                ValidateException e = new ValidateException(Consts.UNPERMITTED_FILE_FORMAT);
+                loggerService.logException(e.getMessage(), e);
+                throw e;
+            }
         }
     }
 }
